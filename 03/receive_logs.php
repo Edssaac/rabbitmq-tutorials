@@ -41,7 +41,7 @@ $channel->close();
 $connection->close();
 
 /*
-php 03/receive_logs.php > logs_from_rabbit.log
+php 03/receive_logs.php > App/logs_from_rabbit.log
 php 03/receive_logs.php
 
 php 03/emit_log.php teste

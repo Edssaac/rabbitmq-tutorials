@@ -42,7 +42,7 @@ $channel->close();
 $connection->close();
 
 /*
-php 04/receive_logs_direct.php error > logs_from_rabbit.log
+php 04/receive_logs_direct.php error > App/logs_from_rabbit.log
 php 04/receive_logs_direct.php error warning info
 
 php 04/emit_log_direct.php warning "Teste sendo testado."
