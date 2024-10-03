@@ -2,6 +2,8 @@
 
 Este repositório contém uma série de testes e estudos relacionados ao RabbitMQ, focando na seção de "Queues Tutorials" disponível em [RabbitMQ Tutorials](https://www.rabbitmq.com/tutorials). O objetivo é explorar e implementar os conceitos básicos de filas utilizando a linguagem PHP.
 
+![demo](./App/demo.png)
+
 **Tecnologias Utilizadas:**
 
 ![COMPOSER](https://img.shields.io/badge/Composer-885630?style=for-the-badge&logo=Composer&logoColor=white)
