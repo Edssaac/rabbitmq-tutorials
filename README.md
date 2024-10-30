@@ -6,7 +6,7 @@ Este repositório contém uma série de testes e estudos relacionados ao RabbitM
 
 **Tecnologias Utilizadas:**
 
-![COMPOSER](https://img.shields.io/badge/Composer-885630?style=for-the-badge&logo=Composer&logoColor=white)
+![COMPOSER](https://img.shields.io/badge/Composer-885630?style=for-the-badge&logo=composer&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
 
@@ -25,8 +25,9 @@ Se você é um desenvolvedor interessado em contribuir ou entender melhor o func
 <br>
 
 **Requisitos de Instalação:**
-- Composer - `2.5.5`
-- PHP - `7.4.33`
+
+![COMPOSER](https://img.shields.io/badge/Composer-2.5.5-885630?style=for-the-badge&logo=composer)
+![PHP](https://img.shields.io/badge/PHP-7.4.33-777BB4?style=for-the-badge&logo=php)
 
 <br>
 
@@ -73,4 +74,4 @@ Pronto! Agora você está testando seu primeiro exemplo. Os demais exemplos segu
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/edssaac)
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:edssaac@gmail.com)
 [![Outlook](https://img.shields.io/badge/Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white)](mailto:edssaac@outlook.com)
-[![Linkedin](https://img.shields.io/badge/LinkedIn-black.svg?style=for-the-badge&logo=linkedin&color=informational)](https://www.linkedin.com/in/edssaac/)
+[![Linkedin](https://img.shields.io/badge/LinkedIn-black.svg?style=for-the-badge&logo=linkedin&color=informational)](https://www.linkedin.com/in/edssaac)
