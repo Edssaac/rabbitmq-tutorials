@@ -1,11 +1,11 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
@@ -31,14 +31,14 @@ $callback = function ($req) {
 
     echo ' [.] fib(', $number, ")\n";
 
-    $msg = new AMQPMessage(
+    $message = new AMQPMessage(
         (string) fib($number),
         [
             'correlation_id' => $req->get('correlation_id')
         ]
     );
 
-    $req->getChannel()->basic_publish($msg, '', $req->get('reply_to'));
+    $req->getChannel()->basic_publish($message, '', $req->get('reply_to'));
 
     $req->ack();
 };

@@ -1,10 +1,10 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 

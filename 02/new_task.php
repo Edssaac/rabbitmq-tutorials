@@ -1,13 +1,13 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 // Incluindo a biblioteca e as classes necessárias:
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 // Criando uma conexão com o servidor:
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
@@ -22,14 +22,14 @@ if (empty($data)) {
 }
 
 // Publicando a mensagem:
-$msg = new AMQPMessage(
+$message = new AMQPMessage(
     $data,
     [
         'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT
     ]
 );
 
-$channel->basic_publish($msg, '', 'task_queue');
+$channel->basic_publish($message, '', 'task_queue');
 
 echo ' [x] Sent ', $data, "\n";
 

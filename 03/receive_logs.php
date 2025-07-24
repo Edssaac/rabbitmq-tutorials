@@ -1,12 +1,13 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 // Incluindo a biblioteca e as classes necessárias:
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 // Abrindo a conexão:
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
@@ -22,8 +23,8 @@ $channel->queue_bind($queue_name, 'logs');
 echo " [*] Waiting for logs. To exit press CTRL+C\n";
 
 // Callback para exibir a mensagem consumida:
-$callback = function ($msg) {
-    echo ' [x] ', $msg->getBody(), "\n";
+$callback = function (AMQPMessage $message) {
+    echo ' [x] ', $message->getBody(), "\n";
 };
 
 // Consumindo a fila:

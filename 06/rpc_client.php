@@ -1,6 +1,6 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -47,7 +47,7 @@ class FibonacciRpcClient
         $this->response = null;
         $this->corr_id = uniqid();
 
-        $msg = new AMQPMessage(
+        $message = new AMQPMessage(
             (string) $number,
             [
                 'correlation_id' => $this->corr_id,
@@ -55,7 +55,7 @@ class FibonacciRpcClient
             ]
         );
 
-        $this->channel->basic_publish($msg, '', 'rpc_queue');
+        $this->channel->basic_publish($message, '', 'rpc_queue');
 
         while (!$this->response) {
             $this->channel->wait();

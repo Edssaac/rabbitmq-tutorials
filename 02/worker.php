@@ -1,12 +1,13 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 // Incluindo a biblioteca e as classes necessárias:
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 // Abrindo a conexão:
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
@@ -16,15 +17,15 @@ $channel->queue_declare('task_queue', false, true, false, false);
 echo " [*] Waiting for messages. To exit press CTRL+C\n";
 
 // Callback para exibir a mensagem consumida:
-$callback = function ($msg) {
-    echo ' [x] Received ', $msg->getBody(), "\n";
+$callback = function (AMQPMessage $message) {
+    echo ' [x] Received ', $message->getBody(), "\n";
 
-    sleep(substr_count($msg->getBody(), '.'));
+    sleep(substr_count($message->getBody(), '.'));
 
     echo " [x] Done\n";
 
     // Informando que a mensagem pode ser removida da fila:
-    $msg->ack();
+    $message->ack();
 };
 
 // Definindo limite da fila:

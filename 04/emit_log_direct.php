@@ -1,11 +1,11 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
@@ -19,9 +19,9 @@ if (empty($data)) {
     $data = 'Hello World!';
 }
 
-$msg = new AMQPMessage($data);
+$message = new AMQPMessage($data);
 
-$channel->basic_publish($msg, 'direct_logs', $severity);
+$channel->basic_publish($message, 'direct_logs', $severity);
 
 echo ' [x] Sent ', $severity, ':', $data, "\n";
 

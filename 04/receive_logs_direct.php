@@ -1,10 +1,11 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
@@ -26,8 +27,8 @@ foreach ($severities as $severity) {
 
 echo " [*] Waiting for logs. To exit press CTRL+C\n";
 
-$callback = function ($msg) {
-    echo ' [x] ', $msg->getRoutingKey(), ':', $msg->getBody(), "\n";
+$callback = function (AMQPMessage $message) {
+    echo ' [x] ', $message->getRoutingKey(), ':', $message->getBody(), "\n";
 };
 
 $channel->basic_consume($queue_name, '', false, true, false, false, $callback);

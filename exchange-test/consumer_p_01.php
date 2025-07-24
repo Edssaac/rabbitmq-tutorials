@@ -1,16 +1,16 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
 $callback = function (AMQPMessage $message) {
-    echo 'Projeto 1: ', $message->body, PHP_EOL;
+    echo 'Projeto 1: ', $message->getBody(), PHP_EOL;
 
     $message->ack();
 };

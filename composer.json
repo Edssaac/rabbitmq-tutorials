@@ -2,19 +2,20 @@
     "name": "edssaac/rabbitmq-tutorials",
     "description": "rabbitmq-tutorials",
     "type": "project",
-    "require": {
-        "php-amqplib/php-amqplib": "^3.2"
-    },
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "App\\": "App/"
-        }
-    },
     "authors": [
         {
             "name": "Edssaac",
             "email": "edssaac@outlook.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "php": ">=8.4",
+        "php-amqplib/php-amqplib": "^3.2"
+    }
 }

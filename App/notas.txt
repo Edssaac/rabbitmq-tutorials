@@ -39,7 +39,7 @@ O 4° parâmetro do basic_consume() é o "no_ack", por padrão o seu valor é fa
 e significa que se uma mensagem entrar no consumidor ela já será retirada da fila.
 Isso é um problema pois se o Consumidor morrer essa mensagem será perdida.
 Devemos passar esse parâmetro como true e após o sucesso do processamento necessário, 
-chamar o método "$msg->ack();"
+chamar o método "$message->ack();"
 
 
 O 3° parâmetro do queue_declare() é o "durable", por padrão o seu valor é false 
@@ -48,7 +48,7 @@ Devemos passar como true para que as mensagens não se percam mesmo nesse cenár
 
 As menagens precisam ser criadas como persistêntes, seguindo esse padrão:
 
-$msg = new AMQPMessage(
+$message = new AMQPMessage(
     $data,
     [
         'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT

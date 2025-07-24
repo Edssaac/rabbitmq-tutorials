@@ -1,13 +1,13 @@
 <?php
 
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 // Incluindo a biblioteca e as classes necessárias:
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 // Criando uma conexão com o servidor:
-$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
 
 $channel = $connection->channel();
 
@@ -15,8 +15,8 @@ $channel = $connection->channel();
 $channel->queue_declare('hello', false, false, false, false);
 
 // Publicando a mensagem:
-$msg = new AMQPMessage('Hello World!');
-$channel->basic_publish($msg, '', 'hello');
+$message = new AMQPMessage('Hello World!');
+$channel->basic_publish($message, '', 'hello');
 
 echo " [x] Sent 'Hello World!'\n";
 

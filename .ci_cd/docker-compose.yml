@@ -1,0 +1,37 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php
+    depends_on:
+      - rabbitmq
+    restart: always
+    env_file:
+      - .docker.env
+    volumes:
+      - ../:/var/www/html
+    ports:
+      - 8080:80
+    networks:
+      - app-network
+  rabbitmq:
+    image: rabbitmq:4.1.2-management-alpine
+    container_name: rabbitmq
+    restart: always
+    env_file:
+      - .docker.env
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672 
+    networks:
+      - app-network
+
+volumes:
+  rabbitmq_data:
+
+networks:
+  app-network:
+    driver: bridge
