@@ -6,9 +6,10 @@ Este repositório contém uma série de testes e estudos relacionados ao RabbitM
 
 **Tecnologias Utilizadas:**
 
+![DOCKER](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=fff)
 ![COMPOSER](https://img.shields.io/badge/Composer-885630?style=for-the-badge&logo=composer&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
-![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
+![RABBITMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
 
 ## Estrutura do Projeto
 
@@ -22,16 +23,15 @@ Este repositório contém uma série de testes e estudos relacionados ao RabbitM
 
 Se você é um desenvolvedor interessado em contribuir ou entender melhor o funcionamento do projeto, aqui estão algumas informações adicionais:
 
-<br>
+**Ambiente:**
 
-**Requisitos de Instalação:**
+![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php)
+![RABBITMQ](https://img.shields.io/badge/Rabbitmq-4.1.2-FF6600?style=for-the-badge&logo=rabbitmq)
 
-![COMPOSER](https://img.shields.io/badge/Composer-2.5.5-885630?style=for-the-badge&logo=composer)
-![PHP](https://img.shields.io/badge/PHP-7.4.33-777BB4?style=for-the-badge&logo=php)
+**Instruções de Instalação e Configuração:**
 
-<br>
+> Atenção: Obrigatório o uso de Docker em sua máquina.
 
-**Instruções de Instalação:**
 1. Clone o repositório do projeto:
 ```
 git clone https://github.com/edssaac/rabbitmq-tutorials
@@ -42,18 +42,23 @@ git clone https://github.com/edssaac/rabbitmq-tutorials
 cd rabbitmq-tutorials
 ```
 
-3. Configure o Composer:
+3. Inicie a aplicação atráves do script que configura o Docker:
 ```
-composer install
+.ci_cd/init.sh  
+```
+Com isso o painel do RabbitMQ estará acessivel: [http://localhost:15672](http://localhost:15672)
+
+```env
+Username: guest
+Password: guest
 ```
 
-<br>
+> **Como Executar:**
 
-**Como Executar:**
+Após concluir as etapas acima, você estará pronto para colocar a aplicação em funcionamento. <br> 
+Siga os passos abaixo para testar o envio e recebimento de mensagens usando RabbitMQ:
 
-Após concluir as etapas de instalação, você está pronto para colocar a aplicação em funcionamento. Siga os passos abaixo para testar o envio e recebimento de mensagens usando RabbitMQ:
-
-1. Para facilitar o acompanhamento, abra dois terminais lado a lado. Isso permitirá que você visualize a interação entre o consumidor e o publicador.
+1. Para facilitar o acompanhamento, abra lado a lado dois terminais no container `rabbitmq-tutorials-php`. Isso permitirá que você visualize a interação entre o consumidor e o publicador.
 
 2. Em um dos terminais, inicie o script que irá consumir as mensagens. Execute o seguinte comando:
    ```
@@ -67,7 +72,18 @@ Após concluir as etapas de instalação, você está pronto para colocar a apli
    ```
    Ao rodar este script, você começará a enviar mensagens para o consumidor.
 
-Pronto! Agora você está testando seu primeiro exemplo. Os demais exemplos seguirão uma estrutura semelhante, apenas preste atenção ao nome dos scripts correspondentes.
+Pronto! Agora você estará testando seu primeiro exemplo. Os demais exemplos seguirão uma estrutura semelhante, apenas preste atenção ao nome dos scripts correspondentes.
+
+---
+
+4. Quando desejar encerrar a aplicação, use:
+```
+.ci_cd/stop.sh
+```
+Caso deseje encerrar e remover os volumes criados, use:
+```
+.ci_cd/stop.sh -v
+```
 
 ## Contato
 
