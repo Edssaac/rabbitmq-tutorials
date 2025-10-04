@@ -7,31 +7,31 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 // Criando uma conexão com o servidor:
-$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection("rabbitmq", 5672, "guest", "guest");
 
 $channel = $connection->channel();
 
 // Criando uma Exchange:
-$channel->exchange_declare('logs', 'fanout', false, false, false);
+$channel->exchange_declare("logs", "fanout", false, false, false);
 
 // Pegando os dados passados pela linha de comando:
-$data = implode(' ', array_slice($argv, 1));
+$data = implode(" ", array_slice($argv, 1));
 
 if (empty($data)) {
-    $data = 'Hello World!';
+    $data = "Hello World!";
 }
 
 // Publicando a mensagem:
 $message = new AMQPMessage(
     $data,
     [
-        'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT
+        "delivery_mode" => AMQPMessage::DELIVERY_MODE_PERSISTENT
     ]
 );
 
-$channel->basic_publish($message, 'logs');
+$channel->basic_publish($message, "logs");
 
-echo ' [x] Sent ', $data, "\n";
+echo "[x] Sent $data\n";
 
 // Fechando o canal e a conexão:
 $channel->close();

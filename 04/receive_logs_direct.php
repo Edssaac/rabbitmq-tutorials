@@ -5,33 +5,36 @@ require_once("../vendor/autoload.php");
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection("rabbitmq", 5672, "guest", "guest");
 
 $channel = $connection->channel();
 
-$channel->exchange_declare('direct_logs', 'direct', false, false, false);
+$channel->exchange_declare("direct_logs", "direct", false, false, false);
 
 list($queue_name,,) = $channel->queue_declare("", false, false, true, false);
 
 $severities = array_slice($argv, 1);
 
 if (empty($severities)) {
-    file_put_contents('php://stderr', "Usage: $argv[0] [info] [warning] [error]\n");
+    file_put_contents("php://stderr", "Usage: $argv[0] [info] [warning] [error]\n");
 
     exit(1);
 }
 
 foreach ($severities as $severity) {
-    $channel->queue_bind($queue_name, 'direct_logs', $severity);
+    $channel->queue_bind($queue_name, "direct_logs", $severity);
 }
 
-echo " [*] Waiting for logs. To exit press CTRL+C\n";
+echo "[*] Waiting for logs. To exit press CTRL+C\n";
 
 $callback = function (AMQPMessage $message) {
-    echo ' [x] ', $message->getRoutingKey(), ':', $message->getBody(), "\n";
+    $routingKey = $message->getRoutingKey();
+    $body = $message->getBody();
+
+    echo "[x] $routingKey: $body\n";
 };
 
-$channel->basic_consume($queue_name, '', false, true, false, false, $callback);
+$channel->basic_consume($queue_name, "", false, true, false, false, $callback);
 
 try {
     $channel->consume();

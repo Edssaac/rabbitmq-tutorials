@@ -7,22 +7,24 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
 // Abrindo a conexão:
-$connection = new AMQPStreamConnection('rabbitmq', 5672, 'guest', 'guest');
+$connection = new AMQPStreamConnection("rabbitmq", 5672, "guest", "guest");
 
 $channel = $connection->channel();
 
 // Se a fila já não existir, então ela será declarada agora:
-$channel->queue_declare('hello', false, false, false, false);
+$channel->queue_declare("hello", false, false, false, false);
 
-echo " [*] Waiting for messages. To exit press CTRL+C\n";
+echo "[*] Waiting for messages. To exit press CTRL+C\n";
 
 // Callback para exibir a mensagem consumida:
 $callback = function (AMQPMessage $message) {
-    echo ' [x] Received ', $message->getBody(), "\n";
+    $body = $message->getBody();
+
+    echo "[x] Received $body\n";
 };
 
 // Consumindo a fila:
-$channel->basic_consume('hello', '', false, true, false, false, $callback);
+$channel->basic_consume("hello", "", false, true, false, false, $callback);
 
 // Tentando consumir a fila:
 try {
